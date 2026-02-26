@@ -32,6 +32,7 @@ python -m json.tool .tmp/news_vulkangruppe*.json
 
 - `directives/` - Operating procedures (SOPs) in Markdown
 - `execution/` - Python scripts (deterministic tools)
+- `skills/` - Agent skills following skills.sh standard
 - `logs/` - Daily execution logs (`exec_YYYYMMDD.log`)
 - `reports/` - OSINT investigation outputs (`YYYYMMDD_HHMMSS_<target>/`)
 - `.tmp/` - Intermediate files (git-ignored, always regenerated)
@@ -44,6 +45,61 @@ python -m json.tool .tmp/news_vulkangruppe*.json
 3. **Log all tool executions** to `logs/exec_YYYYMMDD.log` with: timestamp, tool name, params, status, errors
 4. **Deliverables in cloud** (Google Sheets/Slides), local files are temporary
 5. **Directives are living documents** - update with API constraints, better approaches, edge cases
+
+## Using Agents
+
+This project supports agent delegation for complex multi-step tasks. Use the `task` tool to launch sub-agents:
+
+**Available Agent Types:**
+- `general` - General-purpose agent for multi-step tasks and research
+- `explore` - Fast agent specialized for exploring codebases, finding files, and searching code
+
+**When to Use Agents:**
+- Parallel research across multiple topics
+- Complex multi-step tasks that can be broken down
+- Exploring large codebases for specific patterns
+- Delegating independent subtasks that can run concurrently
+
+**Usage:**
+```
+Use the task tool to launch an agent with:
+- description: Short task description
+- prompt: Detailed instructions for the agent
+- subagent_type: "general" or "explore"
+```
+
+## Using Skills (skills.sh Standard)
+
+This project follows the [skills.sh](https://skills.sh) standard for agent skills. Skills are reusable capabilities that provide procedural knowledge to agents.
+
+**Directory:** `skills/` - Contains custom skills following the skills.sh format
+
+**Skill Format:**
+```yaml
+---
+name: skill-name
+description: Clear description of when to use this skill
+---
+
+# Skill Instructions
+```
+
+**Installing External Skills:**
+```bash
+# Using npx (from Vercel Labs)
+npx skills add <owner/repo>
+
+# Examples:
+npx skills add anthropics/skills/pdf
+npx skills add anthropics/skills/docx
+npx skills add anthropics/skills/xlsx
+```
+
+**Loading Skills in Sessions:**
+When a task requires a specific skill (PDF processing, document creation, etc.), load the skill using the `skill` tool. This provides the agent with detailed procedural knowledge for that domain.
+
+**Creating Custom Skills:**
+Create `skills/<skill-name>/SKILL.md` following the format above. See `skills/README.md` for detailed guidelines.
 
 ## Environment Variables
 
