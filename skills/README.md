@@ -23,6 +23,18 @@ description: Clear description of when to use this skill and when to trigger it
 
 ## Installing Skills from skills.sh
 
+### Quick Install (Recommended)
+
+Run the installation script to set up skills:
+
+```bash
+./scripts/install_skills.sh
+```
+
+This will install recommended skills for OSINT investigations.
+
+### Manual Install
+
 To add skills from the skills.sh ecosystem:
 
 ```bash
@@ -33,7 +45,11 @@ npx skills add <owner/repo>
 npx skills add anthropics/skills/pdf
 ```
 
-**Note:** The `skills` CLI is from Vercel Labs. Skills are installed to a global location, not into this project.
+**Note:** The `skills` CLI is from Vercel Labs. Skills are installed to a **global location**, not into this project.
+
+## Git Ignore
+
+The `skills/` directory is gitignored (except README.md). Custom skills are local-only and not committed to the repo. Remote skills are installed globally via npx.
 
 ## Creating Custom Skills
 

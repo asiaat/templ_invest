@@ -1,0 +1,8 @@
+# Skills to install on project init
+# One skill per line, format: owner/repo
+# Install with: ./scripts/install_skills.sh
+
+anthropics/skills/pdf
+anthropics/skills/docx
+anthropics/skills/xlsx
+anthropics/skills/pptx

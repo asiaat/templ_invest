@@ -212,6 +212,17 @@ credentials.json
 token.json
 logs/
 
+# Skills (local custom + global installs)
+skills/*
+!skills/README.md
+skills-lock.json
+
+# Agent tool directories
+.agent/
+.agents/
+.roo/
+.pi/
+
 reports/*
 
 sociallab/*
